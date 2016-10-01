@@ -17,6 +17,7 @@ bumpy_slow = [features_train[ii][1] for ii in range(0, len(features_train)) if l
 
 
 #### initial visualization
+"""
 plt.xlim(0.0, 1.0)
 plt.ylim(0.0, 1.0)
 plt.scatter(bumpy_fast, grade_fast, color = "b", label="fast")
@@ -25,6 +26,7 @@ plt.legend()
 plt.xlabel("bumpiness")
 plt.ylabel("grade")
 plt.show()
+"""
 ################################################################################
 
 
@@ -33,13 +35,40 @@ plt.show()
 
 
 from sklearn.neighbors import KNeighborsClassifier
+from sklearn.ensemble import RandomForestClassifier
+import numpy as np
 
-clfs = ["kNearest": KNeighborsClassifier(), "randomForest": RandomForestClassifier()]
+n_estimators      = range(1,101)
+criteria          = ["gini", "entropy"]
+min_samples_split = range(1,101)
 
-for name, clf in clfs
+params = np.array(np.meshgrid(n_estimators, [0,1], min_samples_split)).T.reshape(-1,3)
+
+#params = np.array(params).T
+
+#params = params.reshape(-1, 2)
+highest_score = 0
+highest_params = []
+for p in params:
+    n_est, crit_idx, min_samp_split = p
+    crit = criteria[crit_idx]
+
+    clf= RandomForestClassifier(n_estimators=n_est, criterion=crit, min_samples_split=min_samp_split)
+
     clf.fit(features_train, labels_train)
 
-    print "{0} : {1}".format(name,clf.score(features_test, labels_test))    
+    this_score = clf.score(features_test, labels_test)
+
+    if this_score > highest_score:
+        highest_score = this_score
+        highest_params = p
+       
+        print "Random Forest [n_estimator={0}][criterion={1}][min_samples_split={2}] : {3}".format(n_est, crit, min_samp_split, this_score)
+
+n_est, crit_idx, min_samp_split = highest_params
+print "HIGHEST Random Forest [n_estimator={0}][criterion={1}][min_samples_split{2}] : {3}".format(n_est, crit, min_samp_split, highest_score)
+
+ 
 #try:
 #    prettyPicture(clf, features_test, labels_test)
 #except NameError:
