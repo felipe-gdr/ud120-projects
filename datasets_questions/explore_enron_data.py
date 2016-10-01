@@ -19,4 +19,18 @@ import pickle
 
 enron_data = pickle.load(open("../final_project/final_project_dataset.pkl", "r"))
 
+print "{0} people in the dataset".format(len(enron_data))
+print "{0} features per person".format(len(enron_data.itervalues().next()))
+#print "{0}".format(enron_data.itervalues().next())
 
+pois = []
+for k in enron_data:
+    if enron_data[k]["poi"]:
+        pois.append(k)
+
+print "{0} People of Interest in the E+F dataset".format(len(pois))
+
+
+pois_name_file = sum(1 for line in open('../final_project/poi_names.txt')) - 2
+
+print "{0} People of Interest in the name file".format(pois_name_file)
