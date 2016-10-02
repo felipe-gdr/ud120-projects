@@ -21,7 +21,16 @@ enron_data = pickle.load(open("../final_project/final_project_dataset.pkl", "r")
 
 print "{0} people in the dataset".format(len(enron_data))
 print "{0} features per person".format(len(enron_data.itervalues().next()))
-#print "{0}".format(enron_data.itervalues().next())
+print "{0}".format(enron_data.itervalues().next())
+
+j_prentice = enron_data["PRENTICE JAMES"] 
+print "James Prentice total stock: {0}".format(j_prentice['exercised_stock_options'] + j_prentice['restricted_stock'])
+
+w_colwell = enron_data["COLWELL WESLEY"]
+print "Wesley Colwell emails to POIs: {0}".format(w_colwell['from_this_person_to_poi'])
+
+j_skilling = enron_data["SKILLING JEFFREY K"]
+print "Jeffrey K Skilling stock options: {0}".format(j_skilling['exercised_stock_options'])
 
 pois = []
 for k in enron_data:
