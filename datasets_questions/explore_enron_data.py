@@ -32,7 +32,16 @@ print "Wesley Colwell emails to POIs: {0}".format(w_colwell['from_this_person_to
 j_skilling = enron_data["SKILLING JEFFREY K"]
 print "Jeffrey K Skilling stock options: {0}".format(j_skilling['exercised_stock_options'])
 
+k_lay = enron_data["LAY KENNETH L"]
+print "Ken Lay total payments : {0}".format(k_lay['total_payments'])
+
+print "Jeffrey K Skilling total payments: {0}".format(j_skilling['total_payments'])
+
+a_fastow = enron_data["FASTOW ANDREW S"]
+
+print "Andy Fastow total payments: {0}".format(a_fastow['total_payments'])
 pois = []
+
 for k in enron_data:
     if enron_data[k]["poi"]:
         pois.append(k)
