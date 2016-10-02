@@ -41,12 +41,31 @@ a_fastow = enron_data["FASTOW ANDREW S"]
 
 print "Andy Fastow total payments: {0}".format(a_fastow['total_payments'])
 pois = []
+has_salary_count=0
+has_email_count=0
+no_total_pay=0
+poi_no_total_pay=0
 
 for k in enron_data:
+    if enron_data[k]["salary"] != "NaN":
+        has_salary_count += 1
+
+    if enron_data[k]["email_address"] != "NaN":
+        has_email_count += 1
+    
+    if enron_data[k]["total_payments"] == "NaN":
+        no_total_pay += 1
+
     if enron_data[k]["poi"]:
         pois.append(k)
+        if enron_data[k]["total_payments"] == "NaN":
+            poi_no_total_pay += 1
 
 print "{0} People of Interest in the E+F dataset".format(len(pois))
+print "{0} People with salary data".format(has_salary_count)
+print "{0} People with email data".format(has_email_count)
+print "{0} People without payment data, thats {1}%".format(no_total_pay, no_total_pay/146.)
+print "{0} POI without payment data, thats {1}%".format(poi_no_total_pay,poi_no_total_pay/146.)
 
 
 pois_name_file = sum(1 for line in open('../final_project/poi_names.txt')) - 2
