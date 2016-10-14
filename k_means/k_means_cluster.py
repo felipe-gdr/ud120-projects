@@ -53,10 +53,15 @@ features_list = [poi, feature_1, feature_2]
 data = featureFormat(data_dict, features_list )
 poi, finance_features = targetFeatureSplit( data )
 
+
+
 ### in the "clustering with 3 features" part of the mini-project,
 ### you'll want to change this line to 
 ### for f1, f2, _ in finance_features:
 ### (as it's currently written, the line below assumes 2 features)
+
+f1A,f2A = [],[]
+
 max_stock_opt,min_stock_opt,max_sal,min_sal=0.0,999999999.0,0,99999999
 for f1, f2 in finance_features:
     if f2 > max_stock_opt:
@@ -70,7 +75,32 @@ for f1, f2 in finance_features:
         min_sal = f1
 
     plt.scatter( f1, f2 )
+
+    # add values to 2 dimensional arrays
+    f1A.append([f1])
+    f2A.append([f2])
+    
 plt.show()
+
+# create numpy arrays
+f1A = numpy.array(f1A)
+f2A = numpy.array(f2A)
+
+from sklearn.preprocessing import MinMaxScaler
+# Salary Scaling
+scaler1  = MinMaxScaler(feature_range=(0,1))
+salScale = scaler1.fit_transform(f1A)
+
+
+print (200000-scaler1.data_min_)/(scaler1.data_max_-scaler1.data_min_)
+
+# Stock Options Scaling
+scaler2 = MinMaxScaler()
+stockScale = scaler2.fit_transform(f2A)
+
+print (1000000-scaler2.data_min_)/(scaler2.data_max_-scaler2.data_min_)
+
+#print salScale, round(salScale[34][0],2)
 
 print "max stock options={0}. min stock options={1}".format(max_stock_opt,min_stock_opt)
 
