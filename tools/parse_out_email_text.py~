@@ -38,7 +38,7 @@ def parseOutText(f):
         stemmed = [] 
         for w in text_string.split():
             if w != " ":
-                stemmed.append(stemmer.stem(w).strip())
+            stemmed.append(stemmer.stem(w).strip())
 
         words = " ".join(stemmed)
 

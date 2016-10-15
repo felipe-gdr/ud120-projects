@@ -87,7 +87,7 @@ vect = TfidfVectorizer(stop_words="english", lowercase=True)
 vect.fit_transform(word_data)
 
 print "vocabulary contains {0} words".format(len(vect.get_feature_names()))
-print "word 34597 is {0}".format(vect.get_feature_names()[34597])
+print "word 34597 is {0}".format(vect.vocabulary_[34597])
 
 
 
