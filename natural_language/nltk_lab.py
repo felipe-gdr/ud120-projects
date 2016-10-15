@@ -1,0 +1,16 @@
+#import nltk
+from nltk.corpus import stopwords
+from nltk.stem.snowball import SnowballStemmer
+
+#nltk.download()
+
+sw_en = stopwords.words('english')
+
+print "There are {0} stop words in the english language".format(len(sw_en))
+
+stemmer = SnowballStemmer("english")
+print "The stem of responsiveness is {0}".format(stemmer.stem("responsiveness"))
+
+stemmer_pt = SnowballStemmer("portuguese") 
+print "O stem de reposta eh {0}".format(stemmer_pt.stem("reposta")) 
+
