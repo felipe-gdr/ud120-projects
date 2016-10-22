@@ -53,7 +53,7 @@ for name, from_person in [("sara", from_sara), ("chris", from_chris)]:
             ### use str.replace() to remove any instances of the words
             ### ["sara", "shackleton", "chris", "germani"]
 
-            for forbidden in  ["sara", "shackleton", "chris", "germani"]:
+            for forbidden in  ["sara", "shackleton", "chris", "germani", "sshacklensf", "cgermannsf"]:
                 stemmed = stemmed.replace(forbidden, "")
 
             ### append the text to word_data
@@ -88,6 +88,5 @@ vect.fit_transform(word_data)
 
 print "vocabulary contains {0} words".format(len(vect.get_feature_names()))
 print "word 34597 is {0}".format(vect.get_feature_names()[34597])
-
 
 

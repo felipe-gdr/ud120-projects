@@ -38,6 +38,26 @@ labels_train   = labels_train[:150]
 
 
 ### your code goes here
+from sklearn import tree
+clf = tree.DecisionTreeClassifier()
+clf = clf.fit(features_train, labels_train)
+
+print "test accuracy is {0}".format(clf.score(features_test, labels_test))
+
+highest = []
+for idx, val in enumerate(clf.feature_importances_):
+    if val > 0.2:
+        highest.append([idx,val])
+
+print "most important features: {0}".format(highest)
+
+for high in highest:
+    print "important word: {0}, importance: {1}".format(vectorizer.get_feature_names()[high[0]], high[1])
+
+
+
+
+
 
 
 
