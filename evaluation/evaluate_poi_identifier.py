@@ -50,3 +50,10 @@ print confusion_matrix(array(y_test), pred, labels=["POI", "NPOI"])
 print "predicted\t: {0}".format(pred)
 print "actual\t\t: {0}".format(array(y_test))
 
+from sklearn.metrics import recall_score
+from sklearn.metrics import precision_score
+
+
+print "Recall score: {0}".format(recall_score(y_test, pred))
+
+print "Precision score: {0}".format(precision_score(y_test, pred))
